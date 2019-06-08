@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 487097019
+    locked: 0
+  - name: Cenario
+    uniqueID: 4102713609
+    locked: 0
+  - name: LuzAreaSegura
+    uniqueID: 438871023
+    locked: 0
+  - name: Player
+    uniqueID: 1048999203
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
