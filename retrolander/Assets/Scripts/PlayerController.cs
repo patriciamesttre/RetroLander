@@ -133,6 +133,36 @@ public class PlayerController : MonoBehaviour
        hudAltitude.text = string.Format("ALTITUDE: {0}", Mathf.Floor(altitude));
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Montanha":
+                Instantiate(explosao, collision.contacts[0].point, Quaternion.identity);
+                Destroy(gameObject);
+                break;
+
+           case "AreaSegura":
+                if(Mathf.Abs(velocidadeVertical) > velocidadeLimetePouso)
+                {
+                    Instantiate(explosao, collision.contacts[0].point, Quaternion.identity);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    GameController gc = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+                    this.enabled = false;
+                    propulsorFx.enabled = false;
+                    gc.OnGameWin();
+                }
+
+                break;
+            default:
+                break;
+
+        }
+    }
+
 }
 
 
