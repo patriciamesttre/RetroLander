@@ -108,6 +108,31 @@ public class PlayerController : MonoBehaviour
         velocidadeHorizontal = Mathf.FloorToInt(rb.velocity.x * 100f);
     }
 
+    public void AtualizarHUD()
+    {
+        if(velocidadeVertical < 0)
+        {
+            hudVelocidadeVertical.text = string.Format("VELOC V.: {0} {1}", Mathf.Abs(velocidadeVertical), setaBaixo);
+        }
+
+        else
+        {
+            hudVelocidadeVertical.text = string.Format("VELOC V.: {0} {1}", Mathf.Abs(velocidadeVertical), setaCima);
+        }
+
+        if(velocidadeHorizontal < 0)
+        {
+            hudVelocidadeHorizontal.text = string.Format("VELOC H.: {0} {1}", Mathf.Abs(velocidadeHorizontal), setaEsquerda);
+        }
+        else
+        {
+            hudVelocidadeHorizontal.text = string.Format("VELOC H.: {0} {1}", Mathf.Abs(velocidadeHorizontal), setaDireita);
+        }
+
+        hudCombustivel.text = string.Format("COMBUSTIVEL: {0}", Mathf.Floor(combustivel));
+       hudAltitude.text = string.Format("ALTITUDE: {0}", Mathf.Floor(altitude));
+    }
+
 }
 
 
