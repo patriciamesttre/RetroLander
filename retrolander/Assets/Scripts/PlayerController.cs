@@ -50,12 +50,65 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(transform.right * 100f);
     }
 
     // Update is called once per frame
+    void FixeUpdate()
+    {
+        if (combustivel > 0)
+        {
+            Propulsor();
+        }
+
+
+        Rotaciona();
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 100f, raycastLayerMask);
+        if (hit.collider != null)
+        {
+            altitude = Mathf.Abs(hit.point.y - transform.position.y);
+        }
+    }
+
+
     void Update()
     {
-        
+        AtualizaHD();
     }
+
+    public void Propulsor()
+    {
+        float v = Input.GetAxis("Vertical");
+        if (Mathf.Abs(Input.GetAxis("Vertical")) > 0) { 
+            propulsorFx.enabled = true;
+            combustivel -= consumoCombustivel;
+        }
+        else
+        {
+            propulsorFx.enabled = false;
+        }
+
+        rb.AddForce(transform.up * v);
+
+        velocidadeVertical = Mathf.FloorToInt(rb.velocity.y * 100f);
+
+        if (Mathf.Abs(rb.position.x) > 27)
+        {
+            rb.position = new Vector2(rb.position.x * -1, rb.position.y);
+        }
+    }
+
+    public void Rotaciona()
+    {
+        float h = Input.GetAxis("Horizontal");
+        rb.MoveRotation(rb.rotation + (h * velocidade * Time.fixedDeltaTime) * -1);
+
+        velocidadeHorizontal = Mathf.FloorToInt(rb.velocity.x * 100f);
+    }
+
 }
+
+
+
