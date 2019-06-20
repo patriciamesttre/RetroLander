@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        AtualizaHD();
+        AtualizarHUD();
     }
 
     public void Propulsor()
