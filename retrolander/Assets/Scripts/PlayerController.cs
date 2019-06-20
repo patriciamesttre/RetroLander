@@ -55,11 +55,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixeUpdate()
+    void FixedUpdate()
     {
         if (combustivel > 0)
         {
             Propulsor();
+            
         }
 
 
@@ -75,12 +76,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        AtualizarHUD();
+        AtualizaHUD();
     }
 
     public void Propulsor()
     {
         float v = Input.GetAxis("Vertical");
+
         if (Mathf.Abs(Input.GetAxis("Vertical")) > 0) { 
             propulsorFx.enabled = true;
             combustivel -= consumoCombustivel;
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
         velocidadeHorizontal = Mathf.FloorToInt(rb.velocity.x * 100f);
     }
 
-    public void AtualizarHUD()
+    public void AtualizaHUD()
     {
         if(velocidadeVertical < 0)
         {
